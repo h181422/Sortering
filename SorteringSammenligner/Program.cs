@@ -25,18 +25,14 @@ Build/Kjør i Release mode for best mulig sammenligning
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SorteringSammenligner
 {
     class Program
     {
-        const int ANTALL_ELEMENTER =   50000;       // Velg tabellstørrelse.
-        const int MAX_GRENSE_RANDOM = 100000;       // Velg variasjonsbredde.
-
+        const int ANTALL_ELEMENTER =  20000;       // Velg tabellstørrelse. 
+        const int MAX_GRENSE_RANDOM = 20000;       // Velg variasjonsbredde.
+        //Kommenter ut bubble-, selection- og Insertion- sort, om du vil teste med veldig store tabeller
         static Random r = new Random();
 
         static void Main(string[] args)
@@ -58,35 +54,12 @@ namespace SorteringSammenligner
             DateTime tid0, tid1;                // For tidtaking.
             TimeSpan intervall;                 // "
 
-            int[] minTabell = new int[ANTALL_ELEMENTER];        // Oppretter en tabell.
+            int[] minTabell  = new int[ANTALL_ELEMENTER];        // Oppretter en tabell.
             int[] kopiTabell = new int[ANTALL_ELEMENTER];        // Oppretter en tabell til.
 
             Console.Clear();
             Console.WriteLine("Genererer ...");
             GenererTabell(minTabell, ANTALL_ELEMENTER);         // Fyller tabellen med tilfeldige tall.
-            Console.WriteLine();
-            
-
-            Console.WriteLine("kopierer..");
-            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
-            Console.WriteLine("Sorterer med Bubble sort ...");
-            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
-            Sorter.BubbleSort(kopiTabell, ANTALL_ELEMENTER);
-            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
-            intervall = tid1 - tid0;
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
-            Console.WriteLine(SkrivResultat("BubbleSort", intervall));
-            Console.WriteLine();
-
-            Console.WriteLine("kopierer..");
-            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
-            Console.WriteLine("Sorterer med Unsafe BubbleSort...");
-            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
-            Sorter.BubbleSortUnsafe(kopiTabell, ANTALL_ELEMENTER);
-            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
-            intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
-            Console.WriteLine(SkrivResultat("Unsafe Bubblesort", intervall));
             Console.WriteLine();
             
             Console.WriteLine("kopierer..");
@@ -98,28 +71,6 @@ namespace SorteringSammenligner
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
             if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("Array.Sort", intervall));
-            Console.WriteLine();
-            
-            Console.WriteLine("kopierer..");
-            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
-            Console.WriteLine("Sorterer med SelectionSort ...");
-            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
-            Sorter.SelectionSort (kopiTabell, ANTALL_ELEMENTER);
-            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
-            intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
-            Console.WriteLine(SkrivResultat("SelectionSort", intervall));
-            Console.WriteLine();
-
-            Console.WriteLine("kopierer..");
-            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
-            Console.WriteLine("Sorterer med InsertionSort ...");
-            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
-            Sorter.InsertionSort(kopiTabell, ANTALL_ELEMENTER);
-            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
-            intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
-            Console.WriteLine(SkrivResultat("InsertionSort", intervall));
             Console.WriteLine();
             
             Console.WriteLine("kopierer..");
@@ -177,6 +128,51 @@ namespace SorteringSammenligner
             Console.WriteLine(SkrivResultat("QuickSort", intervall));
             Console.WriteLine();
 
+            Console.WriteLine("kopierer..");
+            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
+            Console.WriteLine("Sorterer med Bubble sort ...");
+            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
+            Sorter.BubbleSort(kopiTabell, ANTALL_ELEMENTER);
+            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
+            intervall = tid1 - tid0;
+            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            Console.WriteLine(SkrivResultat("BubbleSort", intervall));
+            Console.WriteLine();
+
+            Console.WriteLine("kopierer..");
+            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
+            Console.WriteLine("Sorterer med Unsafe BubbleSort...");
+            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
+            Sorter.BubbleSortUnsafe(kopiTabell, ANTALL_ELEMENTER);
+            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
+            intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
+            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            Console.WriteLine(SkrivResultat("Unsafe Bubblesort", intervall));
+            Console.WriteLine();
+            
+            Console.WriteLine("kopierer..");
+            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
+            Console.WriteLine("Sorterer med SelectionSort ...");
+            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
+            Sorter.SelectionSort (kopiTabell, ANTALL_ELEMENTER);
+            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
+            intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
+            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            Console.WriteLine(SkrivResultat("SelectionSort", intervall));
+            Console.WriteLine();
+
+            Console.WriteLine("kopierer..");
+            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
+            Console.WriteLine("Sorterer med InsertionSort ...");
+            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
+            Sorter.InsertionSort(kopiTabell, ANTALL_ELEMENTER);
+            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
+            intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
+            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            Console.WriteLine(SkrivResultat("InsertionSort", intervall));
+            Console.WriteLine();
+            
+
             Console.WriteLine("\nTrykk en tast for å kjøre igjen...");
             Console.ReadKey();
 
@@ -197,7 +193,7 @@ namespace SorteringSammenligner
 
         public static string SkrivResultat(string algoritme, TimeSpan tid)
         {
-            return String.Format("Algoritme: " + algoritme + " Tidsforbruk: " + tid.TotalMilliseconds);
+            return String.Format("Algoritme: " + algoritme + " Tidsforbruk: " + tid.TotalMilliseconds + " millisekunder");
         }
         public static string SkrivResultat(string algoritme, TimeSpan tid, int snitt)
         {
