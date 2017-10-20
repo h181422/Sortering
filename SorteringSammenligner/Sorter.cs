@@ -13,7 +13,6 @@ Innhold:
             MergeSort 1 stk. rekursiv variant
             QuickSort, Rekursiv 
 
-
  */
 
 
