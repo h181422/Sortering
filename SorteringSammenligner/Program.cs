@@ -19,6 +19,8 @@ Innhold:
 
 Det meste av koden er basert på min forståelse av de ulike algoritmene,
 så jeg kan ikke garantere at noe av dette er den beste måten å skrive dem på.
+
+Build/Kjør i Release mode for best mulig sammenligning
 */
 
 
