@@ -12,7 +12,7 @@ Innhold:
             MergeSort 2 stk. iterative varianter
             MergeSort 1 stk. rekursiv variant
             QuickSort, Rekursiv 
-
+             
  */
 
 
