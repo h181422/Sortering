@@ -1,6 +1,6 @@
 ﻿/* 
 Filnavn:    SorteringsSammenligner.cs
-Kommentar:  Inspirert av Jan Martin Johannessens kode for sammenligning av sorteringsalgortimer.
+Kommentar:  Inspirert av Jmj sin kode for sammenligning av sorteringsalgortimer.
             Kopierer her deler av hans utgangspunkt, og fyller inn nye algoritmer.
 Forfatter:  Lars Vågenes lv
 Historie:   Når         Hvem   Hva
