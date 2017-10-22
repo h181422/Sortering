@@ -540,6 +540,103 @@ namespace SorteringSammenligner
             }
         }
 
+        //TEST
+        public static void TestSort1(int[] tabell, int size)
+        {
+            int[] tabellStor = new int[2 * size];
+            for (int i = 0; i < 2 * size; i++)
+            {
+                tabellStor[i] = -1;
+
+            }
+
+            //finn max og min
+            int min = tabell[0];
+            int max = tabell[0];
+            for (int i = 1; i < size; i++)
+            {
+                if (tabell[i] > max)
+                    max = tabell[i];
+                else if (tabell[i] < min)
+                    min = tabell[i];
+            }
+            int fraTil = max - min;
+
+            for (int i = 0; i < size; i++)
+            {
+                float index = ((float)(tabell[i] - min) / (float)fraTil) * size;
+                int j = 0;
+                int indexInt = (int)index;
+
+                while (tabellStor[indexInt + j] != -1)
+                {
+                    j++;
+                }
+                tabellStor[indexInt + j] = tabell[i];
+            }
+
+            int k = 0;
+            for (int i = 0; i < 2 * size; i++)
+            {
+                if (tabellStor[i] == -1)
+                {
+                    k++;
+                }
+                else
+                {
+                    tabell[i - k] = tabellStor[i];
+                }
+            }
+            InsertionSort(tabell, size);
+        }
+        public static void TestSort2(int[] tabell, int size)
+        {
+            int[] tabellStor = new int[2 * size];
+            for (int i = 0; i < 2 * size; i++)
+            {
+                tabellStor[i] = -1;
+
+            }
+
+            //finn max og min
+            int min = tabell[0];
+            int max = tabell[0];
+            for (int i = 1; i < size; i++)
+            {
+                if (tabell[i] > max)
+                    max = tabell[i];
+                else if (tabell[i] < min)
+                    min = tabell[i];
+            }
+            int fraTil = max - min;
+
+            for (int i = 0; i < size; i++)
+            {
+                float index = ((float)(tabell[i] - min) / (float)fraTil) * size;
+                int j = 0;
+                int indexInt = (int)index;
+
+                while (tabellStor[indexInt + j] != -1)
+                {
+                    j++;
+                }
+                tabellStor[indexInt + j] = tabell[i];
+            }
+
+            int k = 0;
+            for (int i = 0; i < 2 * size; i++)
+            {
+                if (tabellStor[i] == -1)
+                {
+                    k++;
+                }
+                else
+                {
+                    tabell[i - k] = tabellStor[i];
+                }
+            }
+            ShellSort(tabell, size);
+        }
 
 
         //Hjelpefunksjoner

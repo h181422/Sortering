@@ -56,119 +56,136 @@ namespace SorteringSammenligner
 
             int[] minTabell  = new int[ANTALL_ELEMENTER];        // Oppretter en tabell.
             int[] kopiTabell = new int[ANTALL_ELEMENTER];        // Oppretter en tabell til.
+            int[] sammenlign = new int[ANTALL_ELEMENTER];
+
 
             Console.Clear();
             Console.WriteLine("Genererer ...");
             GenererTabell(minTabell, ANTALL_ELEMENTER);         // Fyller tabellen med tilfeldige tall.
+            kopierTabell(minTabell, sammenlign, ANTALL_ELEMENTER);
+            Array.Sort(sammenlign);
             Console.WriteLine();
             
-            Console.WriteLine("kopierer..");
+            //Array.Sort
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med Array.Sort()...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Array.Sort(kopiTabell);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("Array.Sort", intervall));
             Console.WriteLine();
             
-            Console.WriteLine("kopierer..");
+            //ShellSort
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med ShellSort...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Sorter.ShellSort(kopiTabell, ANTALL_ELEMENTER);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("ShellSort", intervall));
             Console.WriteLine();
-
-            Console.WriteLine("kopierer..");             
+            
+            //MergeSort
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med MergeSort 1...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Sorter.MergeSorter(kopiTabell, ANTALL_ELEMENTER);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("MergeSort 1 (iterativ)", intervall));
             Console.WriteLine();
 
-            Console.WriteLine("kopierer..");             
+            //MergeSort
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med MergeSort 2...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Sorter.MergeSorter2(kopiTabell, ANTALL_ELEMENTER);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("MergeSort 2 (iterativ)", intervall));
             Console.WriteLine();
 
-            Console.WriteLine("kopierer..");              
+            //MergeSort
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med MergeSort 3...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Sorter.RecursiveMergeSort(kopiTabell, ANTALL_ELEMENTER);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("MergeSort 3 (Rekursiv)", intervall));
             Console.WriteLine();
 
-            Console.WriteLine("kopierer..");
+            //QuickSort
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med QuickSort...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Sorter.QuickSort(kopiTabell, ANTALL_ELEMENTER);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("QuickSort", intervall));
             Console.WriteLine();
 
-            Console.WriteLine("kopierer..");
+            //Tilrettelegger tabellen, for så å ta resten med InsertionSort
+            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
+            Console.WriteLine("Sorterer med Test1...");
+            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
+            Sorter.TestSort1(kopiTabell, ANTALL_ELEMENTER);
+            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
+            intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            Console.WriteLine(SkrivResultat("Test1", intervall));
+            Console.WriteLine();
+
+            //Treigere algoritmer følger:
+
+            //BubbleSort
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med Bubble sort ...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Sorter.BubbleSort(kopiTabell, ANTALL_ELEMENTER);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("BubbleSort", intervall));
             Console.WriteLine();
-
-            Console.WriteLine("kopierer..");
+            
+            //BubbleSort med pointers
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med Unsafe BubbleSort...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Sorter.BubbleSortUnsafe(kopiTabell, ANTALL_ELEMENTER);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("Unsafe Bubblesort", intervall));
             Console.WriteLine();
             
-            Console.WriteLine("kopierer..");
+            //SelectionSort
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med SelectionSort ...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Sorter.SelectionSort (kopiTabell, ANTALL_ELEMENTER);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("SelectionSort", intervall));
             Console.WriteLine();
 
-            Console.WriteLine("kopierer..");
+            //InsertionSort
             kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
             Console.WriteLine("Sorterer med InsertionSort ...");
             tid0 = DateTime.Now;		                        // Notér starttidspunkt        
             Sorter.InsertionSort(kopiTabell, ANTALL_ELEMENTER);
             tid1 = DateTime.Now;		                        // Notér stopptidspunkt
             intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
+            if (!SjekkSortering(kopiTabell, sammenlign, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
             Console.WriteLine(SkrivResultat("InsertionSort", intervall));
             Console.WriteLine();
             
@@ -178,18 +195,7 @@ namespace SorteringSammenligner
 
         }
 
-        public static void TestOgVisTid(string typeSorter, int[] minTabell, int[] kopiTabell, ref DateTime tid0, ref DateTime tid1, ref TimeSpan intervall)
-        {
-            Console.WriteLine("kopierer..");
-            kopierTabell(minTabell, kopiTabell, ANTALL_ELEMENTER);
-            Console.WriteLine("Sorterer med " + typeSorter +"..");
-            tid0 = DateTime.Now;		                        // Notér starttidspunkt        
-            Sorter.RecursiveMergeSort(kopiTabell, ANTALL_ELEMENTER);
-            tid1 = DateTime.Now;		                        // Notér stopptidspunkt
-            intervall = tid1 - tid0;                            // Bergegn tidsforbruk.
-            if (!SjekkSortering(kopiTabell, ANTALL_ELEMENTER)) Console.Write("Feilsortert!!  ");
-            Console.WriteLine(SkrivResultat(typeSorter, intervall));
-        }
+
 
         public static string SkrivResultat(string algoritme, TimeSpan tid)
         {
@@ -230,16 +236,17 @@ namespace SorteringSammenligner
 
         static void kopierTabell(int[] tabell1, int[] tabell2, int ANTALL_ELEMENTER)
         {
-            for(int i=0; i< ANTALL_ELEMENTER; i++)
+            Console.WriteLine("kopierer..");
+            for (int i=0; i< ANTALL_ELEMENTER; i++)
                 tabell2[i] = tabell1[i];
         }
 
-        //Sjekker at tabellen er i stigende rekkefølge
-        static bool SjekkSortering(int[] tabell, int size)
+        //Sjekker at tabellen er riktig sortert o forhold til Array.Sort
+        static bool SjekkSortering(int[] tabell, int[]sammenlign, int size)
         {
-            for (int i = 1; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
-                if (tabell[i - 1] > tabell[i])
+                if (tabell[i] != sammenlign[i])
                     return false;
             }
             return true;
